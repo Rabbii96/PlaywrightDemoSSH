@@ -17,14 +17,14 @@ pipeline {
 
         stage('Run Playwright Tests') {
             steps {
-                sh 'npx playwright test --project=chromium --headless'
+                sh 'npx playwright test --project=chromium'
             }
         }
     }
 
     post {
         always {
-            archiveArtifacts artifacts: 'test-results/**/*.zip', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'test-results/**/*.xml', allowEmptyArchive: true
             junit 'test-results/**/*.xml'
         }
         failure {
